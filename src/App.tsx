@@ -1,6 +1,6 @@
 function App() {
   return (
-    <div>
+    <div className="prose">
       <h1 className="text-3xl font-bold underline  text-secondary">
         Hello world!
       </h1>
