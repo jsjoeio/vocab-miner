@@ -1,7 +1,7 @@
 import React from "react"
 import { ScreenState } from "../App"
 
-type InitialScreenProps = {
+  type InitialScreenProps = {
   setScreenState: (screenState: ScreenState) => void
 }
 

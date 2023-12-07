@@ -1,8 +1,9 @@
 import React from "react"
 import { InitialScreen } from "./components/InitialScreen"
 import { ReviewScreen } from "./components/ReviewScreen"
+import { DoneScreen } from "./components/DoneScreen"
 
-export type ScreenState = "initial" | "review"
+export type ScreenState = "initial" | "review" | "done"
 
 function Screen({
   screenState,
@@ -13,7 +14,9 @@ function Screen({
 }) {
   switch (screenState) {
     case "review":
-      return <ReviewScreen />
+      return <ReviewScreen setScreenState={setScreenState} />
+    case "done":
+      return <DoneScreen />
     case "initial":
     default:
       return <InitialScreen setScreenState={setScreenState} />

@@ -1,6 +1,11 @@
 import React from "react"
+import { ScreenState } from "../App"
 
-export function ReviewScreen() {
+type ReviewScreenProps = {
+  setScreenState: (screenState: ScreenState) => void
+}
+
+export function ReviewScreen({ setScreenState }: ReviewScreenProps) {
   const [textToMine, setTextToMine] = React.useState("")
   return (
     <div className="hero min-h-screen bg-base-200">
@@ -19,7 +24,10 @@ export function ReviewScreen() {
             <button className="mx-2">I know this word</button>
             <button
               className="btn btn-primary btn-lg font-bold mx-2"
-              onClick={() => console.log(`text to mine:`, textToMine)}
+              onClick={() => {
+                console.log(`text to mine:`, textToMine)
+		setScreenState("done")
+              }}
             >
               Mine word
             </button>
