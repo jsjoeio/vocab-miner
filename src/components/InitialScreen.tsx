@@ -1,12 +1,14 @@
-import React from "react"
 import { ScreenState } from "../App"
 
-  type InitialScreenProps = {
+type InitialScreenProps = {
   setScreenState: (screenState: ScreenState) => void
+  setTextToMine: (textToMine: string) => void
 }
 
-export function InitialScreen({ setScreenState }: InitialScreenProps) {
-  const [textToMine, setTextToMine] = React.useState("")
+export function InitialScreen({
+  setScreenState,
+  setTextToMine,
+}: InitialScreenProps) {
   return (
     <div className="hero min-h-screen bg-base-200">
       <div className="hero-content text-center">
@@ -21,10 +23,7 @@ export function InitialScreen({ setScreenState }: InitialScreenProps) {
           ></textarea>
           <button
             className="btn btn-primary btn-lg btn-wide font-bold"
-            onClick={() => {
-              console.log(`text to mine:`, textToMine)
-              setScreenState("review")
-            }}
+            onClick={() => setScreenState("review")}
           >
             Let's mine
             <span role="emoji">⛏️</span>
