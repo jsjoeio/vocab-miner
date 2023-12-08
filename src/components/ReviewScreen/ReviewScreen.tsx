@@ -3,36 +3,33 @@ import { ScreenState } from "../../App"
 import { WordsRemaining } from "./WordsRemaining"
 import { CurrentWord } from "./CurrentWord"
 
-/*
-Next Steps
-- clean up verbiage here to match mining terminology
-- figure out how to pass answers back up into the <DoneScreen /> (maybe lift state up)
-*/
-
 type ReviewScreenProps = {
   setScreenState: (screenState: ScreenState) => void
   wordsToReview: Array<string>
+  setWordsMined: (words: Array<string>) => void
 }
 
 interface Answer {
-  known: string[]
-  unknown: string[]
+  ignore: string[]
+  mine: string[]
 }
 
 export function ReviewScreen({
   setScreenState,
   wordsToReview,
+  setWordsMined,
 }: ReviewScreenProps) {
   const [currentWordIndex, setCurrentWordIndex] = React.useState(0)
   const [answers, setAnswers] = React.useState<Answer>({
-    known: [],
-    unknown: [],
+    ignore: [],
+    mine: [],
   })
 
   const totalWords = wordsToReview.length
 
   React.useEffect(() => {
     if (currentWordIndex === totalWords) {
+      setWordsMined(answers.mine)
       setScreenState("done")
     }
   }, [currentWordIndex])
@@ -43,12 +40,12 @@ export function ReviewScreen({
     if (isKnown) {
       setAnswers((prevAnswers) => ({
         ...prevAnswers,
-        known: [...prevAnswers.known, word],
+        ignore: [...prevAnswers.ignore, word],
       }))
     } else {
       setAnswers((prevAnswers) => ({
         ...prevAnswers,
-        unknown: [...prevAnswers.unknown, word],
+        mine: [...prevAnswers.mine, word],
       }))
     }
 

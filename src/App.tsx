@@ -11,11 +11,15 @@ function Screen({
   setScreenState,
   textToMine,
   setTextToMine,
+  wordsMined,
+  setWordsMined,
 }: {
   screenState: ScreenState
   setScreenState: (newScreen: ScreenState) => void
   textToMine: string
   setTextToMine: (textToMine: string) => void
+  wordsMined: Array<string>
+  setWordsMined: (words: Array<string>) => void
 }) {
   switch (screenState) {
     case "review":
@@ -24,10 +28,11 @@ function Screen({
         <ReviewScreen
           setScreenState={setScreenState}
           wordsToReview={vocabMiner.getWordsToReview()}
+          setWordsMined={setWordsMined}
         />
       )
     case "done":
-      return <DoneScreen />
+      return <DoneScreen wordsMined={wordsMined} />
     case "initial":
     default:
       return (
@@ -42,6 +47,7 @@ function Screen({
 function App() {
   const [screenState, setScreenState] = React.useState<ScreenState>("initial")
   const [textToMine, setTextToMine] = React.useState("")
+  const [wordsMined, setWordsMined] = React.useState<string[]>([])
   return (
     <div className="prose">
       <Screen
@@ -49,6 +55,8 @@ function App() {
         setScreenState={setScreenState}
         textToMine={textToMine}
         setTextToMine={setTextToMine}
+        wordsMined={wordsMined}
+        setWordsMined={setWordsMined}
       />
     </div>
   )
