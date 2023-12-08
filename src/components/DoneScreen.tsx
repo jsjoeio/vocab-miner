@@ -1,5 +1,9 @@
-export function DoneScreen() {
-  const WORDS = ["comer", "beber", "boludo", "che"]
+
+type DoneScreenProps = {
+  wordsMined: Array<string>
+}
+
+export function DoneScreen({wordsMined}: DoneScreenProps) {
   return (
     <div className="hero min-h-screen bg-base-200">
       <div className="hero-content text-center">
@@ -8,7 +12,7 @@ export function DoneScreen() {
             <h1 className="pt-4 mb-2">words mined</h1>
             <div className="divider w-5/6 mx-auto"></div>
             <ul className="text-left ml-4">
-              {WORDS.map((word) => (
+              {wordsMined.map((word) => (
                 <li key={word}>{word}</li>
               ))}
             </ul>
