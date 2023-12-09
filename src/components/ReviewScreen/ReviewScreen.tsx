@@ -6,7 +6,7 @@ import { CurrentWord } from "./CurrentWord"
 type ReviewScreenProps = {
   setScreenState: (screenState: ScreenState) => void
   wordsToReview: Array<string>
-  setWordsMined: (words: Array<string>) => void
+  setWordsMined: React.Dispatch<React.SetStateAction<string[]>>
 }
 
 interface Answer {
@@ -20,19 +20,12 @@ export function ReviewScreen({
   setWordsMined,
 }: ReviewScreenProps) {
   const [currentWordIndex, setCurrentWordIndex] = React.useState(0)
-  const [answers, setAnswers] = React.useState<Answer>({
+  const [_, setAnswers] = React.useState<Answer>({
     ignore: [],
     mine: [],
   })
 
   const totalWords = wordsToReview.length
-
-  React.useEffect(() => {
-    if (currentWordIndex === totalWords) {
-      setWordsMined(answers.mine)
-      setScreenState("done")
-    }
-  }, [currentWordIndex])
 
   const handleAnswer = (isKnown: boolean) => {
     const word = wordsToReview[currentWordIndex]
@@ -47,10 +40,17 @@ export function ReviewScreen({
         ...prevAnswers,
         mine: [...prevAnswers.mine, word],
       }))
+      setWordsMined((currWords: Array<string>) => [...currWords, word])
     }
 
-    // Move to the next word
-    setCurrentWordIndex((prevIndex) => prevIndex + 1)
+    const newWordIndex = currentWordIndex + 1
+    setCurrentWordIndex(newWordIndex)
+    // Since set state runs async, we need to get the
+    // actual value here and use it in our check below
+    // to prevent a flash of the UI
+    if (newWordIndex === totalWords) {
+      setScreenState("done")
+    }
   }
   return (
     <div className="hero min-h-screen bg-base-200">

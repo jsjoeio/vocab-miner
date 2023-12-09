@@ -19,7 +19,7 @@ function Screen({
   textToMine: string
   setTextToMine: (textToMine: string) => void
   wordsMined: Array<string>
-  setWordsMined: (words: Array<string>) => void
+  setWordsMined: React.Dispatch<React.SetStateAction<string[]>>
 }) {
   switch (screenState) {
     case "review":
