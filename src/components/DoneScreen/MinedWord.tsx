@@ -1,5 +1,6 @@
 interface MinedWordProps {
   word: string
+  sentence: string | null
 }
 const highlightWord = (sentence: string, word: string) => {
   // Replace this with your actual logic to highlight the word in the sentence
@@ -10,10 +11,8 @@ const highlightWord = (sentence: string, word: string) => {
   )
 }
 
-export function MinedWord({ word }: MinedWordProps) {
-  //   const sentence = getSentenceForWord()
-  const sentence = "hola como estas"
-  const sentenceWithWordBolded = highlightWord(sentence, word)
+export function MinedWord({ word, sentence }: MinedWordProps) {
+  const sentenceWithWordBolded = sentence ? highlightWord(sentence, word) : ""
 
   return (
     <li className="mb-4">
