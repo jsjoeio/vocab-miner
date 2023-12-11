@@ -1,7 +1,7 @@
 import React from "react"
 import { InitialScreen } from "./components/InitialScreen"
 import { ReviewScreen } from "./components/ReviewScreen/ReviewScreen"
-import { DoneScreen } from "./components/DoneScreen"
+import { DoneScreen } from "./components/DoneScreen/DoneScreen"
 import { VocabularyMiner } from "./models/VocabularyMiner"
 
 export type ScreenState = "initial" | "review" | "done"
@@ -45,9 +45,13 @@ function Screen({
 }
 
 function App() {
-  const [screenState, setScreenState] = React.useState<ScreenState>("initial")
+  const [screenState, setScreenState] = React.useState<ScreenState>("done")
   const [textToMine, setTextToMine] = React.useState("")
-  const [wordsMined, setWordsMined] = React.useState<string[]>([])
+  const [wordsMined, setWordsMined] = React.useState<string[]>([
+    "hola",
+    "como",
+    "estas",
+  ])
   return (
     <div className="prose">
       <Screen
