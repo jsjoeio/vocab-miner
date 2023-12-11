@@ -1,9 +1,10 @@
+import { MinedWord } from "./MinedWord"
 
 type DoneScreenProps = {
   wordsMined: Array<string>
 }
 
-export function DoneScreen({wordsMined}: DoneScreenProps) {
+export function DoneScreen({ wordsMined }: DoneScreenProps) {
   return (
     <div className="hero min-h-screen bg-base-200">
       <div className="hero-content text-center">
@@ -13,7 +14,7 @@ export function DoneScreen({wordsMined}: DoneScreenProps) {
             <div className="divider w-5/6 mx-auto"></div>
             <ul className="text-left ml-4">
               {wordsMined.map((word) => (
-                <li key={word}>{word}</li>
+                <MinedWord key={word} word={word} />
               ))}
             </ul>
           </div>
