@@ -1,7 +1,7 @@
 export class VocabularyMiner {
   private text: string
 
-  constructor(text: string) {
+  constructor(text = "") {
     this.text = text
   }
 
@@ -29,5 +29,20 @@ export class VocabularyMiner {
     }
 
     return Array.from(uniqueWords)
+  }
+
+  getSentenceForWord(word: string): string | null {
+    if (this.text === "" || word === "") return null
+    const sentences = this.text.split(/[\.\?!]+/)
+
+    for (const sentence of sentences) {
+      const words = sentence.split(/[\s,¡!¿\?;:"“”\[\]\(\)\{\}'‘’«»]+/)
+
+      if (words.includes(word)) {
+        return sentence.trim()
+      }
+    }
+
+    return null
   }
 }
