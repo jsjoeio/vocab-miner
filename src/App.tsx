@@ -1,5 +1,5 @@
 import React from "react"
-import { InitialScreen } from "./components/InitialScreen"
+import { InitialScreen } from "./components/InitialScreen/InitialScreen"
 import { ReviewScreen } from "./components/ReviewScreen/ReviewScreen"
 import { DoneScreen } from "./components/DoneScreen/DoneScreen"
 import { VocabularyMiner } from "./models/VocabularyMiner"
@@ -13,10 +13,12 @@ function Screen({
   wordsMined,
   setWordsMined,
   vocabMiner,
+  setTextToIgnore,
 }: {
   screenState: ScreenState
   setScreenState: (newScreen: ScreenState) => void
   setTextToMine: (textToMine: string) => void
+  setTextToIgnore: (textToIgnore: string) => void
   wordsMined: Array<string>
   setWordsMined: React.Dispatch<React.SetStateAction<string[]>>
   vocabMiner: VocabularyMiner
@@ -38,6 +40,7 @@ function Screen({
         <InitialScreen
           setScreenState={setScreenState}
           setTextToMine={setTextToMine}
+          setTextToIgnore={setTextToIgnore}
         />
       )
   }
@@ -47,7 +50,8 @@ function App() {
   const [screenState, setScreenState] = React.useState<ScreenState>("initial")
   const [textToMine, setTextToMine] = React.useState("")
   const [wordsMined, setWordsMined] = React.useState<string[]>([])
-  const vocabMiner = new VocabularyMiner(textToMine)
+  const [textToIgnore, setTextToIgnore] = React.useState<string>("")
+  const vocabMiner = new VocabularyMiner(textToMine, textToIgnore)
 
   return (
     <div className="prose">
@@ -58,6 +62,7 @@ function App() {
         wordsMined={wordsMined}
         setWordsMined={setWordsMined}
         vocabMiner={vocabMiner}
+        setTextToIgnore={setTextToIgnore}
       />
     </div>
   )

@@ -1,11 +1,18 @@
 export class VocabularyMiner {
   private text: string
+  private textToIgnore: string
 
-  constructor(text = "") {
+  constructor(text = "", textToIgnore = "") {
     this.text = text
+    this.textToIgnore = textToIgnore
   }
 
-  getWordsToReview(ignoreWords?: string[]): string[] {
+  getIgnoreWords(): string[] {
+    return this.textToIgnore.split(",").filter((word) => word !== "")
+  }
+
+  getWordsToReview(): string[] {
+    const ignoreWords = this.getIgnoreWords()
     const sentences = this.text.toLowerCase().split(/[\.\?!]+/)
     const wordsBySentence = sentences.map((sentence) =>
       sentence.split(/[\s,¡!¿\?;:"“”\[\]\(\)\{\}'‘’«»]+/)
