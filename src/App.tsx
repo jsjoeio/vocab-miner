@@ -54,7 +54,7 @@ function App() {
   const vocabMiner = new VocabularyMiner(textToMine, textToIgnore)
 
   return (
-    <div className="prose">
+    <div className="prose mx-auto">
       <Screen
         screenState={screenState}
         setScreenState={setScreenState}
