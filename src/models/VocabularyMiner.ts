@@ -1,3 +1,22 @@
+/**
+ * Split a text on comma and return an array of words (filters out empty strings)
+ *
+ * exported for testing purposes only
+ */
+export function splitOnComma(text: string): string[] {
+  return text.split(",").filter((word) => word !== "")
+}
+
+/**
+ * Split a text on period, question mark and exclamation mark and return an array of sentences
+ *
+ * exported for testing purposes only
+ */
+export function splitBySentence(text: string): string[] {
+  // Match periods, question marks, and exclamation marks using positive lookahead
+  return text.split(/(?<=[.!?])(?=\s+)/).map((sentence) => sentence.trim())
+}
+
 export class VocabularyMiner {
   private text: string
   private textToIgnore: string
@@ -8,7 +27,7 @@ export class VocabularyMiner {
   }
 
   getIgnoreWords(): string[] {
-    return this.textToIgnore.split(",").filter((word) => word !== "")
+    return splitOnComma(this.textToIgnore)
   }
 
   getWordsToReview(): string[] {
