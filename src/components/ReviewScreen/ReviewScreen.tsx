@@ -55,11 +55,11 @@ export function ReviewScreen({
   };
   return (
     <div className="hero min-h-screen bg-base-200">
-      <div className="hero-content text-center">
-        <div className="max-w-md">
+      <div className="hero-content text-center w-full">
+        <div className="w-full">
           <WordsRemaining numOfWords={totalWords - (currentWordIndex + 1)} />
           <CurrentWord word={wordsToReview[currentWordIndex]} />
-          <div className="flex flex-row justify-around">
+          <div className="inline-flex flex-row justify-around max-w-xs">
             <button className="mx-2" onClick={() => handleAnswer(true)}>
               I know this word
             </button>
@@ -69,7 +69,7 @@ export function ReviewScreen({
               onClick={() => {
                 buttonRef.current && spawnParticles(buttonRef.current, 13);
 
-                // handleAnswer(false);
+                handleAnswer(false);
               }}
             >
               Mine word
@@ -98,7 +98,6 @@ const spawnParticles = (parentEl: Element, numOfParticles: number) => {
     const width = 2 + Math.floor(Math.random() * 4);
     newSpan.style.height = height + "px";
     newSpan.style.width = width + "px";
-    // newSpan.style.transform = "translateY(100px)";
     newSpan.style.transform = "rotate(" + deg + "deg)";
   }
   window.requestAnimationFrame(function () {
