@@ -32,7 +32,7 @@ export class VocabularyMiner {
 
   getWordsToReview(): string[] {
     const ignoreWords = this.getIgnoreWords()
-    const sentences = this.text.toLowerCase().split(/[\.\?!]+/)
+    const sentences = splitBySentence(this.text)
     const wordsBySentence = sentences.map((sentence) =>
       sentence.split(/[\s,¡!¿\?;:"“”\[\]\(\)\{\}'‘’«»]+/)
     )
@@ -59,7 +59,7 @@ export class VocabularyMiner {
 
   getSentenceForWord(word: string): string | null {
     if (this.text === "" || word === "") return null
-    const sentences = this.text.split(/[\.\?!]+/)
+    const sentences = splitBySentence(this.text)
 
     for (const sentence of sentences) {
       const words = sentence.split(/[\s,¡!¿\?;:"“”\[\]\(\)\{\}'‘’«»]+/)
