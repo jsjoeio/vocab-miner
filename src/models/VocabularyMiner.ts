@@ -17,6 +17,17 @@ export function splitBySentence(text: string): string[] {
   return text.split(/(?<=[.!?\n])(?=\s+)/).map((sentence) => sentence.trim())
 }
 
+/**
+ * Splits a sentence into words
+ *
+ * exported for testing purposes only
+ */
+export function splitSentenceIntoWords(sentence: string): string[] {
+  return sentence
+    .split(/[\s,¡!¿\?;:"“”\[\]\(\)\{\}'‘’«»]+/)
+    .filter((word) => word !== "")
+}
+
 export class VocabularyMiner {
   private text: string
   private textToIgnore: string
@@ -34,7 +45,7 @@ export class VocabularyMiner {
     const ignoreWords = this.getIgnoreWords()
     const sentences = splitBySentence(this.text)
     const wordsBySentence = sentences.map((sentence) =>
-      sentence.split(/[\s,¡!¿\?;:"“”\[\]\(\)\{\}'‘’«»]+/)
+      splitSentenceIntoWords(sentence)
     )
 
     const uniqueWords: Set<string> = new Set()
@@ -62,7 +73,7 @@ export class VocabularyMiner {
     const sentences = splitBySentence(this.text)
 
     for (const sentence of sentences) {
-      const words = sentence.split(/[\s,¡!¿\?;:"“”\[\]\(\)\{\}'‘’«»]+/)
+      const words = splitSentenceIntoWords(sentence)
 
       if (words.includes(word)) {
         return sentence.trim()

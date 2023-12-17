@@ -1,5 +1,9 @@
 import { describe, expect, it } from "vitest"
-import { splitBySentence, splitOnComma } from "./VocabularyMiner"
+import {
+  splitBySentence,
+  splitOnComma,
+  splitSentenceIntoWords,
+} from "./VocabularyMiner"
 
 describe("splitOnComma", () => {
   it("should split on comma", () => {
@@ -48,5 +52,24 @@ describe("splitBySentence", () => {
       splitBySentence(`Hola
     Mundo`)
     ).toEqual(["Hola", "Mundo"])
+  })
+})
+
+describe("splitSentenceIntoWords", () => {
+  it("should a regular sentence", () => {
+    expect(splitSentenceIntoWords("Estaba escuchando música")).toEqual([
+      "Estaba",
+      "escuchando",
+      "música",
+    ])
+  })
+  it("should handle words with accents", () => {
+    expect(splitSentenceIntoWords("áéíóúñ")).toEqual(["áéíóúñ"])
+  })
+  it("should handle words with punctuation", () => {
+    expect(splitSentenceIntoWords("¡Hola, Mundo!")).toEqual(["Hola", "Mundo"])
+  })
+  it("should handle brackets", () => {
+    expect(splitSentenceIntoWords("[suspira]")).toEqual(["suspira"])
   })
 })
