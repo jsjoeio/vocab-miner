@@ -37,5 +37,16 @@ describe("splitBySentence", () => {
       "Eh, no sé.",
     ])
   })
-  it.todo("should split on exclamation mark")
+  it("should split on exclamation mark", () => {
+    expect(splitBySentence("¡Qué lindo día! ¿No?")).toEqual([
+      "¡Qué lindo día!",
+      "¿No?",
+    ])
+  })
+  it("should split on line breaks", () => {
+    expect(
+      splitBySentence(`Hola
+    Mundo`)
+    ).toEqual(["Hola", "Mundo"])
+  })
 })
