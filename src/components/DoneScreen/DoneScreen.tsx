@@ -10,8 +10,8 @@ export function DoneScreen({ wordsMined, vocabMiner }: DoneScreenProps) {
   return (
     <div className="hero min-h-screen bg-base-200 pt-4">
       <div className="hero-content text-center">
-        <div className="max-w-md">
-          <div className="glass mx-2 md:pb-4 md:px-4">
+        <div className="max-w-md flex flex-col md:flex-row">
+          <div className="glass mx-2 mb-4 md:pb-4 px-4">
             <h1 className="pt-4 mb-2">words mined</h1>
             <div className="divider w-5/6 mx-auto"></div>
             <ul className="text-left ml-4 md:mr-6">
@@ -23,6 +23,11 @@ export function DoneScreen({ wordsMined, vocabMiner }: DoneScreenProps) {
                 />
               ))}
             </ul>
+          </div>
+          <div className="glass mx-2 md:pb-4 px-4">
+            <h1 className="pt-4 mb-2">words ignored</h1>
+            <div className="divider w-5/6 mx-auto"></div>
+            <p className="italic">vos, vas, hola, mundo</p>
           </div>
         </div>
       </div>
