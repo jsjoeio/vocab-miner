@@ -14,7 +14,10 @@ export function splitOnComma(text: string): string[] {
  */
 export function splitBySentence(text: string): string[] {
   // Match periods, question marks, and exclamation marks using positive lookahead
-  return text.split(/(?<=[.!?\n])(?=\s+)/).map((sentence) => sentence.trim())
+  return text
+    .split(/(?<=[.!?\n])(?=\s+)/)
+    .map((sentence) => sentence.trim())
+    .map((sentence) => sentence.replace(/^- /, "")) // removes - at the beginning of a sentence
 }
 
 /**

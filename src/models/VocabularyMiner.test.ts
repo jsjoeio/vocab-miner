@@ -53,6 +53,12 @@ describe("splitBySentence", () => {
     Mundo`)
     ).toEqual(["Hola", "Mundo"])
   })
+  it("should ignore -", () => {
+    expect(
+      splitBySentence(`- [hace fonomímica en inglés]
+      [huesos crujen]`)
+    ).toEqual(["[hace fonomímica en inglés]", "[huesos crujen]"])
+  })
 })
 
 describe("splitSentenceIntoWords", () => {
