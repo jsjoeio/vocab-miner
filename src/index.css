@@ -1,3 +1,24 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.mine-particles {
+  position:absolute;
+  width: 50px;
+  height: 50px;
+  pointer-events:none;
+}
+
+.mine-particle {
+  @apply bg-primary shadow-lg shadow-primary-content;
+  display:block;
+  width:2px;
+  height:50px;
+  border-radius:4px;
+  position:absolute;
+  left:50%;
+  bottom:50%;
+  transform-origin:center bottom;
+  transition:transform 0.25s, opacity 0.4s, background 0.4s;
+  transition-timing-function:ease-out;
+}

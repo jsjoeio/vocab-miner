@@ -1,13 +1,11 @@
 type WordsRemainingProps = {
-  numOfWords: number
-}
+  numOfWords: number;
+};
 export function WordsRemaining({ numOfWords }: WordsRemainingProps) {
   return (
-    <div>
-      <span className="shadow-sm bg-secondary w-8 h-8 rounded-full inline-block border-2 border-black border-solid">
-        {numOfWords.toString()}
-      </span>
-      <span className="ml-2">words remaining</span>
+    <div className="border border-primary-content px-6 py-2 inline-block rounded-full max-w-md">
+      <span>{numOfWords.toString()}</span>
+      <span className="ml-1">words remaining</span>
     </div>
-  )
+  );
 }
