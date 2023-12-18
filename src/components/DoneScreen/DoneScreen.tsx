@@ -35,19 +35,21 @@ export function DoneScreen({
             <h1 className="pt-4 mb-2">words ignored</h1>
             <div className="divider w-5/6 mx-auto"></div>
             <p className="italic">{ignoreWordsAsString}</p>
-            <button
-              className="btn btn-primary btn-md font-bold mx-auto block"
-              onClick={async () => {
-                try {
-                  await navigator.clipboard.writeText(ignoreWordsAsString)
-                  console.log("Copying to clipboard was successful!")
-                } catch (err) {
-                  console.error("Could not copy text: ", err)
-                }
-              }}
-            >
-              Copy to clipboard
-            </button>
+            {ignoreWordsAsString.length !== 0 && (
+              <button
+                className="btn btn-primary btn-md font-bold mx-auto block mb-4"
+                onClick={async () => {
+                  try {
+                    await navigator.clipboard.writeText(ignoreWordsAsString)
+                    console.log("Copying to clipboard was successful!")
+                  } catch (err) {
+                    console.error("Could not copy text: ", err)
+                  }
+                }}
+              >
+                Copy to clipboard
+              </button>
+            )}
           </div>
         </div>
       </div>
