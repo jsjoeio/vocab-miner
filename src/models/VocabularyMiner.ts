@@ -29,6 +29,7 @@ export function splitSentenceIntoWords(sentence: string): string[] {
   return sentence
     .split(/[\s,¡!¿\?;:"“”\[\]\(\)\{\}'‘’«»]+/)
     .filter((word) => word !== "")
+    .map((word) => word.replace(/\.|…|-/g, ""))
 }
 
 export class VocabularyMiner {

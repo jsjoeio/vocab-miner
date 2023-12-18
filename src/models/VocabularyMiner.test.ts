@@ -78,4 +78,13 @@ describe("splitSentenceIntoWords", () => {
   it("should handle brackets", () => {
     expect(splitSentenceIntoWords("[suspira]")).toEqual(["suspira"])
   })
+  it("should remove ellipsis", () => {
+    expect(splitSentenceIntoWords("dormir y…")).toEqual(["dormir", "y"])
+  })
+  it("should remove periods", () => {
+    expect(splitSentenceIntoWords("yo.")).toEqual(["yo"])
+  })
+  it("should remove dashes", () => {
+    expect(splitSentenceIntoWords("-yo.")).toEqual(["yo"])
+  })
 })
