@@ -4,9 +4,16 @@ import { MinedWord } from "./MinedWord"
 type DoneScreenProps = {
   wordsMined: Array<string>
   vocabMiner: VocabularyMiner
+  wordsIgnored: Array<string>
 }
 
-export function DoneScreen({ wordsMined, vocabMiner }: DoneScreenProps) {
+export function DoneScreen({
+  wordsMined,
+  vocabMiner,
+  wordsIgnored,
+}: DoneScreenProps) {
+  const allIgnoreWords = [...vocabMiner.getIgnoreWords(), ...wordsIgnored]
+  const ignoreWordsAsString = allIgnoreWords.join(", ")
   return (
     <div className="hero min-h-screen bg-base-200 pt-4">
       <div className="hero-content text-center">
@@ -27,7 +34,7 @@ export function DoneScreen({ wordsMined, vocabMiner }: DoneScreenProps) {
           <div className="glass mx-2 md:pb-4 px-4">
             <h1 className="pt-4 mb-2">words ignored</h1>
             <div className="divider w-5/6 mx-auto"></div>
-            <p className="italic">vos, vas, hola, mundo</p>
+            <p className="italic">{ignoreWordsAsString}</p>
           </div>
         </div>
       </div>

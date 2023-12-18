@@ -14,7 +14,7 @@ export function InitialScreen({
   setTextToIgnore,
 }: InitialScreenProps) {
   return (
-    <div className="hero pb-16 md:min-h-screen">
+    <div className="hero pb-16 min-h-screen">
       <div className="">
         <div className="mx-4">
           <h1 className="text-5xl font-bold text-center mt-4">

@@ -14,6 +14,8 @@ function Screen({
   setWordsMined,
   vocabMiner,
   setTextToIgnore,
+  wordsIgnored,
+  setWordsIgnored,
 }: {
   screenState: ScreenState
   setScreenState: (newScreen: ScreenState) => void
@@ -21,6 +23,8 @@ function Screen({
   setTextToIgnore: (textToIgnore: string) => void
   wordsMined: Array<string>
   setWordsMined: React.Dispatch<React.SetStateAction<string[]>>
+  wordsIgnored: Array<string>
+  setWordsIgnored: React.Dispatch<React.SetStateAction<string[]>>
   vocabMiner: VocabularyMiner
 }) {
   switch (screenState) {
@@ -30,10 +34,17 @@ function Screen({
           setScreenState={setScreenState}
           wordsToReview={vocabMiner.getWordsToReview()}
           setWordsMined={setWordsMined}
+          setWordsIgnored={setWordsIgnored}
         />
       )
     case "done":
-      return <DoneScreen wordsMined={wordsMined} vocabMiner={vocabMiner} />
+      return (
+        <DoneScreen
+          wordsMined={wordsMined}
+          vocabMiner={vocabMiner}
+          wordsIgnored={wordsIgnored}
+        />
+      )
     case "initial":
     default:
       return (
@@ -50,6 +61,7 @@ function App() {
   const [screenState, setScreenState] = React.useState<ScreenState>("initial")
   const [textToMine, setTextToMine] = React.useState("")
   const [wordsMined, setWordsMined] = React.useState<string[]>([])
+  const [wordsIgnored, setWordsIgnored] = React.useState<string[]>([])
   const [textToIgnore, setTextToIgnore] = React.useState<string>("")
   const vocabMiner = new VocabularyMiner(textToMine, textToIgnore)
 
@@ -61,6 +73,8 @@ function App() {
         setTextToMine={setTextToMine}
         wordsMined={wordsMined}
         setWordsMined={setWordsMined}
+        wordsIgnored={wordsIgnored}
+        setWordsIgnored={setWordsIgnored}
         vocabMiner={vocabMiner}
         setTextToIgnore={setTextToIgnore}
       />
