@@ -2,6 +2,7 @@ import React from "react"
 import { ScreenState } from "../../App"
 import { WordsRemaining } from "./WordsRemaining"
 import { CurrentWord } from "./CurrentWord"
+import { EndReviewing } from "./EndReviewing"
 
 type ReviewScreenProps = {
   setScreenState: (screenState: ScreenState) => void
@@ -62,7 +63,7 @@ export function ReviewScreen({
         <div className="w-full">
           <WordsRemaining numOfWords={totalWords - (currentWordIndex + 1)} />
           <CurrentWord word={wordsToReview[currentWordIndex]} />
-          <div className="inline-flex flex-row justify-around max-w-xs">
+          <div className="inline-flex flex-row justify-around max-w-xs mb-4">
             <button className="mx-2" onClick={() => handleAnswer(true)}>
               I know this word
             </button>
@@ -78,6 +79,7 @@ export function ReviewScreen({
               Mine word
             </button>
           </div>
+          <EndReviewing setScreenState={setScreenState} />
         </div>
       </div>
     </div>
