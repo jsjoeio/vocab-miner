@@ -57,7 +57,7 @@ export class VocabularyMiner {
     for (let i = 0; i < wordsBySentence.length; i++) {
       const words = wordsBySentence[i]
       for (let j = 0; j < words.length; j++) {
-        const word = words[j]
+        const word = words[j].toLowerCase()
         if (
           word === "" ||
           /^\d+$/.test(word) ||
