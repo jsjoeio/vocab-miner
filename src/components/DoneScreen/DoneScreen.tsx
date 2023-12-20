@@ -18,7 +18,7 @@ export function DoneScreen({
     <div className="hero min-h-screen bg-base-200 pt-4">
       <div className="hero-content text-center">
         <div className="flex flex-col md:flex-row items-stretch">
-          <div className="glass mx-2 mb-4 md:mb-0 md:pb-4 px-4 min-h-64 md:min-w-80">
+          <div className="glass mx-2 mb-4 md:mb-0 md:pb-4 px-4 min-h-64 lg:min-w-[400px]">
             <h1 className="pt-4 mb-2">words mined</h1>
             <div className="divider w-5/6 mx-auto"></div>
             <ul className="text-left ml-4 md:mr-6">
@@ -31,7 +31,7 @@ export function DoneScreen({
               ))}
             </ul>
           </div>
-          <div className="glass mx-2 mb-4 md:mb-0 md:pb-4 px-4 min-h-64">
+          <div className="glass mx-2 mb-4 md:mb-0 md:pb-4 px-4 min-h-64 lg:min-w-[400px] lg:self-start">
             <h1 className="pt-4 mb-2">words ignored</h1>
             <div className="divider w-5/6 mx-auto"></div>
             <p className="italic">{ignoreWordsAsString}</p>
