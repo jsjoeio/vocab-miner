@@ -1,5 +1,3 @@
-import { CopyToClipboard } from 'react-copy-to-clipboard';
-
 interface MinedWordProps {
   word: string
   sentence: string | null
@@ -18,11 +16,11 @@ export function MinedWord({ word, sentence }: MinedWordProps) {
 
   return (
     <li className="mb-4">
-      <CopyToClipboard onCopy={() => window.alert("Copied to Clipboard")} text={word}>
+      {/* <CopyToClipboard onCopy={() => window.alert("Copied to Clipboard")} text={word}> */}
         <div className="tooltip tooltip-right" data-tip="Click to Copy">
             <button className="font-semibold text-lg">{word}</button>
         </div>
-      </CopyToClipboard>
+      {/* </CopyToClipboard> */}
       <span
         className="block italic font-light"
         dangerouslySetInnerHTML={{ __html: sentenceWithWordBolded }}

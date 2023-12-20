@@ -12,15 +12,12 @@
   },
   "dependencies": {
     "framer-motion": "^10.16.16",
-    "npm-watch": "^0.11.0",
     "react": "^18.2.0",
-    "react-copy-to-clipboard": "^5.1.0",
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.10",
-    "@types/react": "^18.2.45",
-    "@types/react-copy-to-clipboard": "^5.0.7",
+    "@types/react": "^18.2.41",
     "@types/react-dom": "^18.2.17",
     "@typescript-eslint/eslint-plugin": "^6.13.1",
     "@typescript-eslint/parser": "^6.13.1",
