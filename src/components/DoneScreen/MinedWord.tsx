@@ -16,11 +16,24 @@ export function MinedWord({ word, sentence }: MinedWordProps) {
 
   return (
     <li className="mb-4">
-      {/* <CopyToClipboard onCopy={() => window.alert("Copied to Clipboard")} text={word}> */}
         <div className="tooltip tooltip-right" data-tip="Click to Copy">
-            <button className="font-semibold text-lg">{word}</button>
+            <button
+              className="font-semibold text-lg"
+              onClick={async () => {
+                try {
+                  await navigator.clipboard.writeText(word)
+                  // console.log("Copying successful!")
+                  document.getElementsByClassName("tooltip-right")[0].setAttribute("data-tip", "Copied!")
+                  
+                  
+                } catch (err) {
+                  console.log("Could not copy text: ", err)
+                }
+              }}
+            >
+              {word}
+            </button>
         </div>
-      {/* </CopyToClipboard> */}
       <span
         className="block italic font-light"
         dangerouslySetInnerHTML={{ __html: sentenceWithWordBolded }}
