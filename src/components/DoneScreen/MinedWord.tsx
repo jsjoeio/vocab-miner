@@ -24,8 +24,11 @@ export function MinedWord({ word, sentence }: MinedWordProps) {
                   await navigator.clipboard.writeText(word)
                   // console.log("Copying successful!")
                   document.getElementsByClassName("tooltip-right")[0].setAttribute("data-tip", "Copied!")
-                  
-                  
+                  // setTimeout(() => {
+                  //   document.getElementsByClassName("tooltip-right")[0].setAttribute("className", "hidden")
+                  // }, 1000);
+                  // document.getElementsByClassName("tooltip-right")[0].setAttribute("data-tip", "Click to Copy")
+
                 } catch (err) {
                   console.log("Could not copy text: ", err)
                 }
