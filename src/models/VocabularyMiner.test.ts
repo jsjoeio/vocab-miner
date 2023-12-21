@@ -22,6 +22,9 @@ describe("splitOnComma", () => {
       "ñ",
     ])
   })
+  it("should ignore whitespaces", () => {
+    expect(splitOnComma("saber, y")).toEqual(["saber", "y"])
+  })
 })
 
 describe("splitBySentence", () => {
