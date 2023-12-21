@@ -4,7 +4,10 @@
  * exported for testing purposes only
  */
 export function splitOnComma(text: string): string[] {
-  return text.split(",").filter((word) => word !== "")
+  return text
+    .split(",")
+    .filter((word) => word !== "")
+    .map((word) => word.trim())
 }
 
 /**
