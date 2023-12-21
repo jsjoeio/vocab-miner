@@ -1,3 +1,5 @@
+import React from "react"
+
 interface MinedWordProps {
   word: string
   sentence: string | null
@@ -13,27 +15,37 @@ const highlightWord = (sentence: string, word: string) => {
 
 export function MinedWord({ word, sentence }: MinedWordProps) {
   const sentenceWithWordBolded = sentence ? highlightWord(sentence, word) : ""
+  const [isCopied, setIsCopied] = React.useState(false)
+
+  React.useEffect(() => {
+    if (isCopied) {
+      const timeout = setTimeout(() => {
+        setIsCopied(false)
+      }, 2000)
+      return () => clearTimeout(timeout)
+    }
+  }, [isCopied])
 
   return (
     <li className="mb-4">
-        <div className="tooltip tooltip-right" data-tip="Click to Copy">
-            <button
-              className="font-semibold text-lg"
-              onClick={async () => {
-                try {
-                  await navigator.clipboard.writeText(word)
-                  // console.log("Copying successful!")
-                  document.getElementsByClassName("tooltip-right")[0].setAttribute("data-tip", "Copied!")
-                  
-                  
-                } catch (err) {
-                  console.log("Could not copy text: ", err)
-                }
-              }}
-            >
-              {word}
-            </button>
-        </div>
+      <div
+        className="tooltip tooltip-right"
+        data-tip={isCopied ? "Copied!" : "Copy to clipboard"}
+      >
+        <button
+          className="font-semibold text-lg"
+          onClick={async () => {
+            try {
+              await navigator.clipboard.writeText(word)
+              setIsCopied(true)
+            } catch (err) {
+              console.log("Could not copy text: ", err)
+            }
+          }}
+        >
+          {word}
+        </button>
+      </div>
       <span
         className="block italic font-light"
         dangerouslySetInnerHTML={{ __html: sentenceWithWordBolded }}
