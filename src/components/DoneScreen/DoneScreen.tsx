@@ -1,3 +1,4 @@
+import React from "react"
 import { VocabularyMiner } from "../../models/VocabularyMiner"
 import { MinedWord } from "./MinedWord"
 
@@ -12,8 +13,18 @@ export function DoneScreen({
   vocabMiner,
   wordsIgnored,
 }: DoneScreenProps) {
+  const [isCopied, setIsCopied] = React.useState(false)
   const allIgnoreWords = [...vocabMiner.getIgnoreWords(), ...wordsIgnored]
   const ignoreWordsAsString = allIgnoreWords.join(", ")
+
+  React.useEffect(() => {
+    if (isCopied) {
+      const timeout = setTimeout(() => {
+        setIsCopied(false)
+      }, 1500)
+      return () => clearTimeout(timeout)
+    }
+  }, [isCopied])
   return (
     <div className="hero min-h-screen bg-base-200 pt-4">
       <div className="hero-content text-center">
@@ -41,13 +52,14 @@ export function DoneScreen({
                 onClick={async () => {
                   try {
                     await navigator.clipboard.writeText(ignoreWordsAsString)
+                    setIsCopied(true)
                     console.log("Copying to clipboard was successful!")
                   } catch (err) {
                     console.error("Could not copy text: ", err)
                   }
                 }}
               >
-                Copy to clipboard
+                {isCopied ? "Copied!" : "Copy to clipboard"}
               </button>
             )}
           </div>
