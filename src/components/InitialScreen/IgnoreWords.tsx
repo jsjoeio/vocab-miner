@@ -12,7 +12,7 @@ export function IgnoreWords({ setTextToIgnore }: IgnoreWordsProps) {
       {showTextarea ? (
         <div className="">
           <Textarea
-            placeholder="vos,vas,manzana"
+            placeholder="vos, vas, manzana"
             onChange={(e) => setTextToIgnore(e.target.value)}
           />
           <button
