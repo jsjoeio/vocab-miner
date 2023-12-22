@@ -35,6 +35,33 @@ export function splitSentenceIntoWords(sentence: string): string[] {
     .map((word) => word.replace(/\.|…|-/g, ""))
 }
 
+const isWordChar = (char: string) => /\w|¿/.test(char)
+
+export const highlightWord = (sentence: string, word: string) => {
+  const escapedWord = word.replace(/[-\/\\^$*+?.()|[\]{}]/g, "\\$&") // Escape special characters
+  const wordRegex = new RegExp(
+    `(?<!\\w)(${escapedWord}|${
+      escapedWord.charAt(0).toUpperCase() + escapedWord.slice(1)
+    })(?!\\w)`,
+    "gi"
+  )
+
+  return sentence.replace(wordRegex, (match, offset, fullText) => {
+    // Check if the characters before and after the match are word characters
+    if (
+      (offset > 0 && isWordChar(fullText[offset - 1])) ||
+      (offset + match.length < fullText.length &&
+        isWordChar(fullText[offset + match.length]))
+    ) {
+      // If they are, return the match unchanged
+      return match
+    } else {
+      // If they aren't, highlight the match
+      return `<span class="font-medium">${match}</span>`
+    }
+  })
+}
+
 export class VocabularyMiner {
   private text: string
   private textToIgnore: string
@@ -82,7 +109,12 @@ export class VocabularyMiner {
     for (const sentence of sentences) {
       const words = splitSentenceIntoWords(sentence)
 
-      if (words.includes(word)) {
+      if (
+        words.includes(word) ||
+        // This way, we check for the word with the first letter capitalized
+        // i.e. "Hola" instead of "hola"
+        words.includes(word.charAt(0).toUpperCase() + word.slice(1))
+      ) {
         return sentence.trim()
       }
     }

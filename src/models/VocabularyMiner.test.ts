@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest"
 import {
+  highlightWord,
   splitBySentence,
   splitOnComma,
   splitSentenceIntoWords,
@@ -89,5 +90,38 @@ describe("splitSentenceIntoWords", () => {
   })
   it("should remove dashes", () => {
     expect(splitSentenceIntoWords("-yo.")).toEqual(["yo"])
+  })
+})
+
+describe("highlightWord", () => {
+  it("should highlight a word", () => {
+    expect(highlightWord("Estaba escuchando música", "escuchando")).toEqual(
+      'Estaba <span class="font-medium">escuchando</span> música'
+    )
+  })
+  it("should handle accents", () => {
+    expect(highlightWord("Estaba escuchando música", "música")).toEqual(
+      'Estaba escuchando <span class="font-medium">música</span>'
+    )
+  })
+  it("should handle different casing", () => {
+    expect(highlightWord("Estaba escuchando música", "estaba")).toEqual(
+      '<span class="font-medium">Estaba</span> escuchando música'
+    )
+  })
+  it("should handle edge cases", () => {
+    expect(highlightWord("¿Qué pasa?", "qué")).toEqual(
+      '¿<span class="font-medium">Qué</span> pasa?'
+    )
+  })
+  it("should highlight all instances in sentence", () => {
+    expect(highlightWord("Estaba escuchando música y cantando y", "y")).toEqual(
+      'Estaba escuchando música <span class="font-medium">y</span> cantando <span class="font-medium">y</span>'
+    )
+  })
+  it("should not highlight words that are also part of other words", () => {
+    expect(highlightWord("porque que", "que")).toEqual(
+      `porque <span class="font-medium">que</span>`
+    )
   })
 })
