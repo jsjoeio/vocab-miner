@@ -47,6 +47,8 @@ function Screen({
           wordsIgnored={wordsIgnored}
           setScreenState={setScreenState}
           setTextToIgnore={setTextToIgnore}
+          totalWordsReviewed={vocabMiner.getWordsToReview().length}
+          totalWordsInText={vocabMiner.getTotalWords()}
         />
       )
     case "initial":
