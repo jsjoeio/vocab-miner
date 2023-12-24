@@ -2,6 +2,7 @@ import React from "react"
 import { VocabularyMiner } from "../../models/VocabularyMiner"
 import { ScreenState } from "../../App"
 import { MinedWord } from "./MinedWord"
+import { Stats } from "./Stats"
 
 type DoneScreenProps = {
   wordsMined: Array<string>
@@ -69,9 +70,10 @@ export function DoneScreen({
               </button>
             )}
           </div>
+          <Stats />
         </div>
         <button
-          className="btn btn-ghost block mx-auto"
+          className="btn btn-ghost block mx-auto mt-4"
           onClick={() => {
             if (hasIgnoreWords) {
               setTextToIgnore(ignoreWordsAsString)
