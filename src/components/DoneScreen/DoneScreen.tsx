@@ -4,12 +4,25 @@ import { ScreenState } from "../../App"
 import { MinedWord } from "./MinedWord"
 import { Stats } from "./Stats"
 
+function formatDate(date: Date): string {
+  const options: Intl.DateTimeFormatOptions = {
+    month: "short", // abbreviated month name
+    day: "numeric", // day of the month
+    year: "numeric", // full year
+  }
+
+  const formatter = new Intl.DateTimeFormat("en-US", options)
+  return formatter.format(date)
+}
+
 type DoneScreenProps = {
   wordsMined: Array<string>
   vocabMiner: VocabularyMiner
   wordsIgnored: Array<string>
   setScreenState: (screenState: ScreenState) => void
   setTextToIgnore: (textToIgnore: string) => void
+  totalWordsReviewed: number
+  totalWordsInText: number
 }
 
 export function DoneScreen({
@@ -18,11 +31,16 @@ export function DoneScreen({
   wordsIgnored,
   setScreenState,
   setTextToIgnore,
+  totalWordsReviewed,
+  totalWordsInText,
 }: DoneScreenProps) {
   const [isCopied, setIsCopied] = React.useState(false)
   const allIgnoreWords = [...vocabMiner.getIgnoreWords(), ...wordsIgnored]
+  const totalIgnoreWords = allIgnoreWords.length
+  const totalNewWords = wordsMined.length
+  const currentDate = new Date()
+  const todayDateString = formatDate(currentDate)
   const ignoreWordsAsString = allIgnoreWords.join(", ")
-
   const hasIgnoreWords = ignoreWordsAsString.length !== 0
 
   React.useEffect(() => {
@@ -70,7 +88,13 @@ export function DoneScreen({
               </button>
             )}
           </div>
-          <Stats />
+          <Stats
+            totalIgnoreWords={totalIgnoreWords}
+            totalNewWords={totalNewWords}
+            todayDateString={todayDateString}
+            totalWordsReviewed={totalWordsReviewed}
+            totalWordsInText={totalWordsInText}
+          />
         </div>
         <button
           className="btn btn-ghost block mx-auto mt-4"

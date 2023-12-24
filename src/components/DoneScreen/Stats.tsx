@@ -1,23 +1,46 @@
-export function Stats() {
+type StatsProps = {
+  totalWordsInText: number
+  totalWordsReviewed: number
+  todayDateString: string
+  totalNewWords: number
+  totalIgnoreWords: number
+}
+export function Stats({
+  totalWordsReviewed,
+  totalWordsInText,
+  todayDateString,
+  totalIgnoreWords,
+  totalNewWords,
+}: StatsProps) {
+  const percentNewWords = Math.round((totalNewWords / totalWordsInText) * 100)
+  const percentIgnoreWords = Math.round(
+    (totalIgnoreWords / totalWordsInText) * 100
+  )
   return (
     <div>
       <div className="stats stats-vertical shadow">
         <div className="stat">
+          <div className="stat-title">Total Words</div>
+          <div className="stat-value">{totalWordsInText}</div>
+          <div className="stat-desc">{todayDateString}</div>
+        </div>
+
+        <div className="stat">
           <div className="stat-title">Words Reviewed</div>
-          <div className="stat-value">50</div>
-          <div className="stat-desc">Dec 24, 2023</div>
+          <div className="stat-value">{totalWordsReviewed}</div>
+          <div className="stat-desc">{todayDateString}</div>
         </div>
 
         <div className="stat">
           <div className="stat-title">New Words</div>
-          <div className="stat-value">2</div>
-          <div className="stat-desc">5% of total</div>
+          <div className="stat-value">{totalNewWords}</div>
+          <div className="stat-desc">{percentNewWords}% of total</div>
         </div>
 
         <div className="stat">
           <div className="stat-title">Ignored Words</div>
-          <div className="stat-value">48</div>
-          <div className="stat-desc">89% of total</div>
+          <div className="stat-value">{totalIgnoreWords}</div>
+          <div className="stat-desc">{percentIgnoreWords}% of total</div>
         </div>
       </div>
     </div>
