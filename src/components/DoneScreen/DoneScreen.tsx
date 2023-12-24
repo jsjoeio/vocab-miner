@@ -52,9 +52,9 @@ export function DoneScreen({
     }
   }, [isCopied])
   return (
-    <div className="min-h-screen bg-base-200 pt-4">
+    <div className="min-h-screen bg-base-200 pt-4 max-w-none">
       <div className="py-16 text-center">
-        <div className="flex flex-col md:flex-row items-stretch">
+        <div className="flex flex-col md:flex-row items-stretch md:justify-center">
           <div className="glass mx-2 mb-4 md:mb-0 md:pb-4 px-4 min-h-64 lg:min-w-[400px]">
             <h1 className="pt-4 mb-2">words mined</h1>
             <div className="divider w-5/6 mx-auto"></div>

@@ -17,8 +17,8 @@ export function Stats({
     (totalIgnoreWords / totalWordsInText) * 100
   )
   return (
-    <div>
-      <div className="stats stats-vertical shadow">
+    <div className="mx-2">
+      <div className="stats-vertical glass">
         <div className="stat">
           <div className="stat-title">Total Words</div>
           <div className="stat-value">{totalWordsInText}</div>
