@@ -19,17 +19,25 @@ export function MinedWord({ word, sentence }: MinedWordProps) {
 
   React.useEffect(() => {
     if (isCopied) {
-      const timeout = setTimeout(() => {
+      const timeout1 = setTimeout(() => {
+        document.getElementsByClassName("minedWord")[0].classList.remove("tooltip", "tooltip-right")
+      }, 1000)
+
+      const timeout2 = setTimeout(() => {
+        document.getElementsByClassName("minedWord")[0].classList.add("tooltip", "tooltip-right")
         setIsCopied(false)
       }, 2000)
-      return () => clearTimeout(timeout)
+      return () => {
+        clearTimeout(timeout1)
+        clearTimeout(timeout2)
+      }
     }
   }, [isCopied])
 
   return (
     <li className="mb-4">
       <div
-        className="tooltip tooltip-right"
+        className="tooltip tooltip-right minedWord"
         data-tip={isCopied ? "Copied!" : "Copy to clipboard"}
       >
         <button
