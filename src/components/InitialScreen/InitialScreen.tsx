@@ -6,12 +6,14 @@ type InitialScreenProps = {
   setScreenState: (screenState: ScreenState) => void
   setTextToMine: (textToMine: string) => void
   setTextToIgnore: (textToIgnore: string) => void
+  textToIgnore: string
 }
 
 export function InitialScreen({
   setScreenState,
   setTextToMine,
   setTextToIgnore,
+  textToIgnore,
 }: InitialScreenProps) {
   return (
     <div className="hero pb-16 min-h-screen">
@@ -24,7 +26,10 @@ export function InitialScreen({
             placeholder="Un texto largo en español..."
             onChange={(e) => setTextToMine(e.target.value)}
           />
-          <IgnoreWords setTextToIgnore={setTextToIgnore} />
+          <IgnoreWords
+            setTextToIgnore={setTextToIgnore}
+            textToIgnore={textToIgnore}
+          />
           <button
             className="btn btn-primary btn-lg btn-wide font-bold mx-auto block"
             onClick={() => setScreenState("review")}
