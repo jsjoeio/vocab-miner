@@ -16,6 +16,7 @@ function Screen({
   setTextToIgnore,
   wordsIgnored,
   setWordsIgnored,
+  textToIgnore,
 }: {
   screenState: ScreenState
   setScreenState: (newScreen: ScreenState) => void
@@ -23,6 +24,7 @@ function Screen({
   setTextToIgnore: (textToIgnore: string) => void
   wordsMined: Array<string>
   setWordsMined: React.Dispatch<React.SetStateAction<string[]>>
+  textToIgnore: string
   wordsIgnored: Array<string>
   setWordsIgnored: React.Dispatch<React.SetStateAction<string[]>>
   vocabMiner: VocabularyMiner
@@ -43,6 +45,10 @@ function Screen({
           wordsMined={wordsMined}
           vocabMiner={vocabMiner}
           wordsIgnored={wordsIgnored}
+          setScreenState={setScreenState}
+          setTextToIgnore={setTextToIgnore}
+          totalWordsReviewed={vocabMiner.getWordsToReview().length}
+          totalWordsInText={vocabMiner.getTotalWords()}
         />
       )
     case "initial":
@@ -52,6 +58,7 @@ function Screen({
           setScreenState={setScreenState}
           setTextToMine={setTextToMine}
           setTextToIgnore={setTextToIgnore}
+          textToIgnore={textToIgnore}
         />
       )
   }
@@ -75,6 +82,7 @@ function App() {
         setWordsMined={setWordsMined}
         wordsIgnored={wordsIgnored}
         setWordsIgnored={setWordsIgnored}
+        textToIgnore={textToIgnore}
         vocabMiner={vocabMiner}
         setTextToIgnore={setTextToIgnore}
       />
