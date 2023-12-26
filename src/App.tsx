@@ -45,10 +45,13 @@ function Screen({
           wordsMined={wordsMined}
           vocabMiner={vocabMiner}
           wordsIgnored={wordsIgnored}
-          setScreenState={setScreenState}
           setTextToIgnore={setTextToIgnore}
           totalWordsReviewed={vocabMiner.getWordsToReview().length}
           totalWordsInText={vocabMiner.getTotalWords()}
+          reset={() => {
+            setWordsMined([])
+            setScreenState("initial")
+          }}
         />
       )
     case "initial":
