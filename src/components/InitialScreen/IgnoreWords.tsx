@@ -1,5 +1,6 @@
 import React from "react"
 import { Textarea } from "./Textarea"
+import { CUSTOM_EVENT_ADD_IGNORE_WORDS } from "../../constants"
 
 type IgnoreWordsProps = {
   setTextToIgnore: (textToIgnore: string) => void
@@ -11,6 +12,7 @@ export function IgnoreWords({
   textToIgnore,
 }: IgnoreWordsProps) {
   const [showTextarea, setShowTextarea] = React.useState(false)
+  const [touched, setTouched] = React.useState(false)
   // This is so that after the user is all done
   // and hits "Mine more words?", we can prefill
   // the ignore words.
@@ -26,7 +28,16 @@ export function IgnoreWords({
           <Textarea
             placeholder="vos, vas, manzana"
             value={textToIgnore}
-            onChange={(e) => setTextToIgnore(e.target.value)}
+            onChange={(e) => {
+              setTextToIgnore(e.target.value)
+
+              if (!touched) {
+                // User has added text to textarea, send analytics event
+                // @ts-expect-error - this is for Beam analytics
+                window.beam(CUSTOM_EVENT_ADD_IGNORE_WORDS)
+                setTouched(true)
+              }
+            }}
           />
           <button
             className="btn btn-sm hover:btn-error block mx-auto"
