@@ -19,7 +19,6 @@ type DoneScreenProps = {
   wordsMined: Array<string>
   vocabMiner: VocabularyMiner
   wordsIgnored: Array<string>
-  setSceenState: (screenState: ScreenState) => void
   setTextToIgnore: (textToIgnore: string) => void
   totalWordsReviewed: number
   totalWordsInText: number
