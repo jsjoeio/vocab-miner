@@ -19,20 +19,22 @@ type DoneScreenProps = {
   wordsMined: Array<string>
   vocabMiner: VocabularyMiner
   wordsIgnored: Array<string>
-  setScreenState: (screenState: ScreenState) => void
+  setSceenState: (screenState: ScreenState) => void
   setTextToIgnore: (textToIgnore: string) => void
   totalWordsReviewed: number
   totalWordsInText: number
+  // A function to call when the user clicks the "Mine more words?" button
+  reset: () => void
 }
 
 export function DoneScreen({
   wordsMined,
   vocabMiner,
   wordsIgnored,
-  setScreenState,
   setTextToIgnore,
   totalWordsReviewed,
   totalWordsInText,
+  reset,
 }: DoneScreenProps) {
   const [isCopied, setIsCopied] = React.useState(false)
   const allIgnoreWords = [...vocabMiner.getIgnoreWords(), ...wordsIgnored]
@@ -102,7 +104,7 @@ export function DoneScreen({
             if (hasIgnoreWords) {
               setTextToIgnore(ignoreWordsAsString)
             }
-            setScreenState("initial")
+            reset()
           }}
         >
           Mine more words?
