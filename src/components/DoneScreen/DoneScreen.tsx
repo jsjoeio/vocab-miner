@@ -2,6 +2,10 @@ import React from "react"
 import { VocabularyMiner } from "../../models/VocabularyMiner"
 import { MinedWord } from "./MinedWord"
 import { Stats } from "./Stats"
+import {
+  CUSTOM_EVENT_COPY_IGNORE_WORDS,
+  CUSTOM_EVENT_VIEW_DONE_SCREEN,
+} from "../../constants"
 
 function formatDate(date: Date): string {
   const options: Intl.DateTimeFormatOptions = {
@@ -35,6 +39,9 @@ export function DoneScreen({
   reset,
 }: DoneScreenProps) {
   const [isCopied, setIsCopied] = React.useState(false)
+  const [touched, setTouched] = React.useState(false)
+  const [touchedIgnoreWordsCopyButton, setTouchedIgnoreWordsCopyButton] =
+    React.useState(false)
   const allIgnoreWords = [...vocabMiner.getIgnoreWords(), ...wordsIgnored]
   const totalIgnoreWords = allIgnoreWords.length
   const totalNewWords = wordsMined.length
@@ -42,6 +49,15 @@ export function DoneScreen({
   const todayDateString = formatDate(currentDate)
   const ignoreWordsAsString = allIgnoreWords.join(", ")
   const hasIgnoreWords = ignoreWordsAsString.length !== 0
+
+  React.useEffect(() => {
+    if (!touched) {
+      // User has added viewed done screen, send analytics event
+      // @ts-expect-error - this is for Beam analytics
+      window.beam(CUSTOM_EVENT_VIEW_DONE_SCREEN)
+      setTouched(true)
+    }
+  }, [touched])
 
   React.useEffect(() => {
     if (isCopied) {
@@ -79,6 +95,12 @@ export function DoneScreen({
                   try {
                     await navigator.clipboard.writeText(ignoreWordsAsString)
                     setIsCopied(true)
+                    if (!touchedIgnoreWordsCopyButton) {
+                      // User has copied ignore buttosn to clipboard, send analytics event
+                      // @ts-expect-error - this is for Beam analytics
+                      window.beam(CUSTOM_EVENT_COPY_IGNORE_WORDS)
+                      setTouchedIgnoreWordsCopyButton(true)
+                    }
                   } catch (err) {
                     console.error("Could not copy text: ", err)
                   }

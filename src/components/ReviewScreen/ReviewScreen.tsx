@@ -3,6 +3,7 @@ import { ScreenState } from "../../App"
 import { WordsRemaining } from "./WordsRemaining"
 import { CurrentWord } from "./CurrentWord"
 import { EndReviewing } from "./EndReviewing"
+import { CUSTOM_EVENT_MINE_WORD } from "../../constants"
 
 type ReviewScreenProps = {
   setScreenState: (screenState: ScreenState) => void
@@ -28,6 +29,7 @@ export function ReviewScreen({
     ignore: [],
     mine: [],
   })
+  const [touched, setTouched] = React.useState(false)
 
   const totalWords = wordsToReview.length
 
@@ -46,6 +48,12 @@ export function ReviewScreen({
         mine: [...prevAnswers.mine, word],
       }))
       setWordsMined((currWords: Array<string>) => [...currWords, word])
+      if (!touched) {
+        // User has mined word, send analytics event
+        // @ts-expect-error - this is for Beam analytics
+        window.beam(CUSTOM_EVENT_MINE_WORD)
+        setTouched(true)
+      }
     }
 
     const newWordIndex = currentWordIndex + 1

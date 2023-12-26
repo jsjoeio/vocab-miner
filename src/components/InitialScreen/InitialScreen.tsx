@@ -1,6 +1,8 @@
+import React from "react"
 import { ScreenState } from "../../App"
 import { IgnoreWords } from "./IgnoreWords"
 import { Textarea } from "./Textarea"
+import { CUSTOM_EVENT_ADD_TEXT_TO_MINE } from "../../constants"
 
 type InitialScreenProps = {
   setScreenState: (screenState: ScreenState) => void
@@ -15,6 +17,8 @@ export function InitialScreen({
   setTextToIgnore,
   textToIgnore,
 }: InitialScreenProps) {
+  const [touched, setTouched] = React.useState(false)
+
   return (
     <div className="hero pb-16 min-h-screen">
       <div className="">
@@ -24,7 +28,15 @@ export function InitialScreen({
           </h1>
           <Textarea
             placeholder="Un texto largo en español..."
-            onChange={(e) => setTextToMine(e.target.value)}
+            onChange={(e) => {
+              setTextToMine(e.target.value)
+              if (!touched) {
+                // User has added text to textarea, send analytics event
+                // @ts-expect-error - this is for Beam analytics
+                window.beam(CUSTOM_EVENT_ADD_TEXT_TO_MINE)
+                setTouched(true)
+              }
+            }}
           />
           <IgnoreWords
             setTextToIgnore={setTextToIgnore}
