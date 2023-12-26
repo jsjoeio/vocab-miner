@@ -1,6 +1,5 @@
 import React from "react"
 import { VocabularyMiner } from "../../models/VocabularyMiner"
-import { ScreenState } from "../../App"
 import { MinedWord } from "./MinedWord"
 import { Stats } from "./Stats"
 
