@@ -8,4 +8,5 @@ export default {
   daisyui: {
     themes: ["cupcake"],
   },
-}
+  safelist: ["stats-vertical", "stats-horizontal"],
+};

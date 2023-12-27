@@ -1,10 +1,10 @@
 type StatsProps = {
-  totalWordsInText: number
-  totalWordsReviewed: number
-  todayDateString: string
-  totalNewWords: number
-  totalIgnoreWords: number
-}
+  totalWordsInText: number;
+  totalWordsReviewed: number;
+  todayDateString: string;
+  totalNewWords: number;
+  totalIgnoreWords: number;
+};
 export function Stats({
   totalWordsReviewed,
   totalWordsInText,
@@ -12,13 +12,16 @@ export function Stats({
   totalIgnoreWords,
   totalNewWords,
 }: StatsProps) {
-  const percentNewWords = Math.round((totalNewWords / totalWordsInText) * 100)
+  const percentNewWords = Math.round((totalNewWords / totalWordsInText) * 100);
   const percentIgnoreWords = Math.round(
     (totalIgnoreWords / totalWordsInText) * 100
-  )
+  );
   return (
     <div className="mx-2">
-      <div className="stats-vertical glass">
+      <div
+        id="stats"
+        className="stats stats-vertical glass bg-base-200 rounded-none"
+      >
         <div className="stat">
           <div className="stat-title">Total Words</div>
           <div className="stat-value">{totalWordsInText}</div>
@@ -44,5 +47,5 @@ export function Stats({
         </div>
       </div>
     </div>
-  )
+  );
 }
