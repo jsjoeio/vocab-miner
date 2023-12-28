@@ -20,6 +20,22 @@ function formatDate(date: Date): string {
   return formatter.format(date);
 }
 
+function getTotalIgnoredWords(
+  finalIgnoredWords: string[],
+  totalWordsReviewed: string[]
+  ): number {
+    const IgnoredWordsUsed: Set<string> = new Set()
+
+    for (let i = 0; i < finalIgnoredWords.length; i++) {
+      for (let j = 0; j < totalWordsReviewed.length; j++) {
+        if (finalIgnoredWords[i].toLowerCase() === totalWordsReviewed[j].toLowerCase())
+        IgnoredWordsUsed.add(finalIgnoredWords[i]);
+      }
+    }
+
+    return IgnoredWordsUsed.size;
+}
+
 type DoneScreenProps = {
   wordsMined: Array<string>;
   vocabMiner: VocabularyMiner;
@@ -45,7 +61,10 @@ export function DoneScreen({
   const [touchedIgnoreWordsCopyButton, setTouchedIgnoreWordsCopyButton] =
     React.useState(false);
   const allIgnoreWords = [...vocabMiner.getIgnoreWords(), ...wordsIgnored];
-  const totalIgnoreWords = allIgnoreWords.length;
+  const totalIgnoreWords = getTotalIgnoredWords(
+    allIgnoreWords,
+    vocabMiner.getTextWords()
+  );
   const totalNewWords = wordsMined.length;
   const currentDate = new Date();
   const todayDateString = formatDate(currentDate);

@@ -71,6 +71,17 @@ export class VocabularyMiner {
     this.textToIgnore = textToIgnore
   }
 
+  getTextWords(): string[] {
+        // Split the text into sentences
+        const sentences = splitBySentence(this.text)
+        // Split each sentence into words
+        const wordsBySentence = sentences.map((sentence) =>
+          splitSentenceIntoWords(sentence)
+        )
+
+        return wordsBySentence[0]
+  }
+
   getTotalWords(): number {
     // Split the text into sentences
     const sentences = splitBySentence(this.text)
