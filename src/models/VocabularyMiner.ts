@@ -35,6 +35,16 @@ export function splitSentenceIntoWords(sentence: string): string[] {
     .map((word) => word.replace(/\.|…|-/g, ""))
 }
 
+function lowerCaseWords(words: string[]): string[] {
+  return words.map((word) => word.toLowerCase())
+}
+
+export function removeDuplicateWords(wordsAsText: string): string {
+  const words = splitOnComma(wordsAsText)
+  const uniqueWords = new Set(words)
+  return Array.from(uniqueWords).join(", ")
+}
+
 const isWordChar = (char: string) => /\w|¿/.test(char)
 
 export const highlightWord = (sentence: string, word: string) => {
@@ -72,14 +82,14 @@ export class VocabularyMiner {
   }
 
   getTextWords(): string[] {
-        // Split the text into sentences
-        const sentences = splitBySentence(this.text)
-        // Split each sentence into words
-        const wordsBySentence = sentences.map((sentence) =>
-          splitSentenceIntoWords(sentence)
-        )
+    // Split the text into sentences
+    const sentences = splitBySentence(this.text)
+    // Split each sentence into words
+    const wordsBySentence = sentences.map((sentence) =>
+      splitSentenceIntoWords(sentence)
+    )
 
-        return wordsBySentence[0]
+    return wordsBySentence[0]
   }
 
   getTotalWords(): number {
@@ -93,7 +103,7 @@ export class VocabularyMiner {
   }
 
   getIgnoreWords(): string[] {
-    return splitOnComma(this.textToIgnore)
+    return lowerCaseWords(splitOnComma(this.textToIgnore))
   }
 
   getWordsToReview(): string[] {
@@ -106,9 +116,9 @@ export class VocabularyMiner {
     const uniqueWords: Set<string> = new Set()
 
     for (let i = 0; i < wordsBySentence.length; i++) {
-      const words = wordsBySentence[i]
+      const words = lowerCaseWords(wordsBySentence[i])
       for (let j = 0; j < words.length; j++) {
-        const word = words[j].toLowerCase()
+        const word = words[j]
         if (
           word === "" ||
           /^\d+$/.test(word) ||
