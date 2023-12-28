@@ -39,6 +39,12 @@ function lowerCaseWords(words: string[]): string[] {
   return words.map((word) => word.toLowerCase())
 }
 
+export function removeDuplicateWords(wordsAsText: string): string {
+  const words = splitOnComma(wordsAsText)
+  const uniqueWords = new Set(words)
+  return Array.from(uniqueWords).join(", ")
+}
+
 const isWordChar = (char: string) => /\w|¿/.test(char)
 
 export const highlightWord = (sentence: string, word: string) => {
