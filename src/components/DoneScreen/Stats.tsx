@@ -25,7 +25,6 @@ export function Stats({
         <div className="stat">
           <div className="stat-title">Total Words</div>
           <div className="stat-value">{totalWordsInText}</div>
-          <div className="stat-desc">{todayDateString}</div>
         </div>
 
         <div className="stat">
@@ -37,13 +36,13 @@ export function Stats({
         <div className="stat">
           <div className="stat-title">New Words</div>
           <div className="stat-value">{totalNewWords}</div>
-          <div className="stat-desc">{percentNewWords}% of total</div>
+          <div className="stat-desc">{percentNewWords}% of review</div>
         </div>
 
         <div className="stat">
           <div className="stat-title">Ignored Words</div>
           <div className="stat-value">{totalIgnoreWords}</div>
-          <div className="stat-desc">{percentIgnoreWords}% of total</div>
+          <div className="stat-desc">{percentIgnoreWords}% of review</div>
         </div>
       </div>
     </div>
