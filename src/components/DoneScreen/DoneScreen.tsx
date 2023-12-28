@@ -74,7 +74,7 @@ export function DoneScreen({
   const totalNewWords = wordsMined.length
   const currentDate = new Date()
   const todayDateString = formatDate(currentDate)
-  const ignoreWordsAsString = allIgnoreWords.join(", ")
+  const ignoreWordsAsString = removeDuplicateWords(allIgnoreWords.join(", "))
   const hasIgnoreWords = ignoreWordsAsString.length !== 0
 
   React.useEffect(() => {
