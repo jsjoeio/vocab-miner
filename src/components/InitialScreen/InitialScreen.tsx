@@ -9,9 +9,11 @@ type InitialScreenProps = {
   setTextToMine: (textToMine: string) => void
   setTextToIgnore: (textToIgnore: string) => void
   textToIgnore: string
+  textToMine: string
 }
 
 export function InitialScreen({
+  textToMine,
   setScreenState,
   setTextToMine,
   setTextToIgnore,
@@ -43,6 +45,7 @@ export function InitialScreen({
             textToIgnore={textToIgnore}
           />
           <button
+            disabled={!textToMine}
             className="btn btn-primary btn-lg btn-wide font-bold mx-auto block"
             onClick={() => setScreenState("review")}
           >

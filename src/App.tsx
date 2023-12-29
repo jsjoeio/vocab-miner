@@ -17,6 +17,7 @@ function Screen({
   wordsIgnored,
   setWordsIgnored,
   textToIgnore,
+  textToMine,
 }: {
   screenState: ScreenState
   setScreenState: (newScreen: ScreenState) => void
@@ -28,6 +29,7 @@ function Screen({
   wordsIgnored: Array<string>
   setWordsIgnored: React.Dispatch<React.SetStateAction<string[]>>
   vocabMiner: VocabularyMiner
+  textToMine: string
 }) {
   switch (screenState) {
     case "review":
@@ -62,6 +64,7 @@ function Screen({
           setTextToMine={setTextToMine}
           setTextToIgnore={setTextToIgnore}
           textToIgnore={textToIgnore}
+          textToMine={textToMine}
         />
       )
   }
@@ -86,6 +89,7 @@ function App() {
         wordsIgnored={wordsIgnored}
         setWordsIgnored={setWordsIgnored}
         textToIgnore={textToIgnore}
+        textToMine={textToMine}
         vocabMiner={vocabMiner}
         setTextToIgnore={setTextToIgnore}
       />
