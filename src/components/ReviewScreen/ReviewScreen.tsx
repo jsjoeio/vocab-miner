@@ -69,7 +69,7 @@ export function ReviewScreen({
     <div className="hero min-h-screen bg-base-200">
       <div className="hero-content text-center w-full">
         <div className="w-full">
-          <WordsRemaining numOfWords={totalWords - (currentWordIndex + 1)} />
+          <WordsRemaining numOfWords={totalWords - currentWordIndex} />
           <CurrentWord word={wordsToReview[currentWordIndex]} />
           <div className="inline-flex flex-row justify-around max-w-xs mb-4">
             <button className="mx-2" onClick={() => handleAnswer(true)}>
