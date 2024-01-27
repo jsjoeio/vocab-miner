@@ -33,9 +33,10 @@ export function InitialScreen({
             onChange={(e) => {
               setTextToMine(e.target.value)
               if (!touched) {
-                // User has added text to textarea, send analytics event
-                // @ts-expect-error - this is for Beam analytics
-                window.beam(CUSTOM_EVENT_ADD_TEXT_TO_MINE)
+                if (window.beam) {
+                  // User has added text to textarea, send analytics event
+                  window.beam(CUSTOM_EVENT_ADD_TEXT_TO_MINE)
+                }
                 setTouched(true)
               }
             }}

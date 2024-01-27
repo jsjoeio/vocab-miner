@@ -12,6 +12,12 @@ import {
 } from "../../constants"
 import { StatsShareButton } from "./StatsShareButton"
 
+declare global {
+  interface Window {
+    beam?: (eventName: string) => void
+  }
+}
+
 function formatDate(date: Date): string {
   const options: Intl.DateTimeFormatOptions = {
     month: "short", // abbreviated month name
@@ -79,9 +85,10 @@ export function DoneScreen({
 
   React.useEffect(() => {
     if (!touched) {
-      // User has added viewed done screen, send analytics event
-      // @ts-expect-error - this is for Beam analytics
-      window.beam(CUSTOM_EVENT_VIEW_DONE_SCREEN)
+      if (window.beam) {
+        // User has added viewed done screen, send analytics event
+        window.beam(CUSTOM_EVENT_VIEW_DONE_SCREEN)
+      }
       setTouched(true)
     }
   }, [touched])
@@ -139,9 +146,10 @@ export function DoneScreen({
                     await navigator.clipboard.writeText(ignoreWordsAsString)
                     setIsCopied(true)
                     if (!touchedIgnoreWordsCopyButton) {
-                      // User has copied ignore buttosn to clipboard, send analytics event
-                      // @ts-expect-error - this is for Beam analytics
-                      window.beam(CUSTOM_EVENT_COPY_IGNORE_WORDS)
+                      if (window.beam) {
+                        // User has copied ignore buttosn to clipboard, send analytics event
+                        window.beam(CUSTOM_EVENT_COPY_IGNORE_WORDS)
+                      }
                       setTouchedIgnoreWordsCopyButton(true)
                     }
                   } catch (err) {

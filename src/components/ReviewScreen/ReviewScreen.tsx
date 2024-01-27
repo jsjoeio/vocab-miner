@@ -49,9 +49,10 @@ export function ReviewScreen({
       }))
       setWordsMined((currWords: Array<string>) => [...currWords, word])
       if (!touched) {
-        // User has mined word, send analytics event
-        // @ts-expect-error - this is for Beam analytics
-        window.beam(CUSTOM_EVENT_MINE_WORD)
+        if (window.beam) {
+          // User has mined word, send analytics event
+          window.beam(CUSTOM_EVENT_MINE_WORD)
+        }
         setTouched(true)
       }
     }
